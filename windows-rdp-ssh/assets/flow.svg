@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from service account key to Compute API to Windows instance to RDP and SSH">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:14px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11.5px}
+      .node{fill:#161d2c;stroke:#2a3550;stroke-width:1.4;rx:12}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- node 1: key -->
+  <rect x="24" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#5a4a12" stroke-width="1.4"/>
+  <g transform="translate(44,102)" stroke="#FBBC05" stroke-width="2.4" fill="none">
+    <circle cx="7" cy="7" r="6"/>
+    <path d="M12 10 L26 24 M22 20 l4 -4 M18 24 l4 -4" stroke-linecap="round"/>
+  </g>
+  <text class="lbl" x="82" y="106">Service</text>
+  <text class="lbl" x="82" y="123">account key</text>
+
+  <!-- node 2: compute api -->
+  <rect x="238" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(256,100)" fill="#4285F4">
+    <circle cx="10" cy="18" r="7"/><circle cx="20" cy="12" r="10"/><circle cx="31" cy="18" r="6.5"/>
+    <rect x="6" y="18" width="28" height="9" rx="4.5"/>
+  </g>
+  <text class="lbl" x="298" y="106">Compute</text>
+  <text class="lbl" x="298" y="123">API</text>
+
+  <!-- node 3: windows instance -->
+  <rect x="452" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#0e4d6b" stroke-width="1.4"/>
+  <g transform="translate(470,98)">
+    <rect x="0" y="0" width="12" height="12" rx="1.5" fill="#00A4EF"/>
+    <rect x="14" y="0" width="12" height="12" rx="1.5" fill="#00A4EF"/>
+    <rect x="0" y="14" width="12" height="12" rx="1.5" fill="#00A4EF"/>
+    <rect x="14" y="14" width="12" height="12" rx="1.5" fill="#00A4EF"/>
+  </g>
+  <text class="lbl" x="512" y="106">Windows</text>
+  <text class="lbl" x="512" y="123">instance</text>
+
+  <!-- outputs -->
+  <rect x="668" y="40" width="150" height="56" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(686,56)" stroke="#8ab4f8" stroke-width="2" fill="none">
+    <rect x="0" y="0" width="26" height="18" rx="2"/><path d="M9 22 h8 M13 18 v4" stroke-linecap="round"/>
+  </g>
+  <text class="lbl" x="724" y="63">RDP</text>
+  <text class="sub" x="724" y="80">port 3389</text>
+
+  <rect x="668" y="124" width="150" height="56" rx="12" fill="#161d2c" stroke="#173f2a" stroke-width="1.4"/>
+  <g transform="translate(686,140)" fill="none" stroke="#7ee2a8" stroke-width="2">
+    <rect x="0" y="0" width="26" height="20" rx="3"/><path d="M5 7 l5 4 l-5 4 M14 15 h7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="lbl" x="724" y="147">SSH</text>
+  <text class="sub" x="724" y="164">port 22</text>
+
+  <!-- arrows -->
+  <line x1="180" y1="110" x2="232" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="394" y1="110" x2="446" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M608 110 H636 V68 H662" fill="none" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M608 110 H636 V152 H662" fill="none" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="102" y="164" text-anchor="middle">key file only</text>
+  <text class="sub" x="316" y="164" text-anchor="middle">create, firewall, reset</text>
+  <text class="sub" x="530" y="164" text-anchor="middle">Windows Server</text>
+</svg>

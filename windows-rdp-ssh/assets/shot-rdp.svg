@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="460" viewBox="0 0 780 460" role="img" aria-label="Windows desktop reached over RDP">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f2a4a"/>
+      <stop offset="0.5" stop-color="#12507a"/>
+      <stop offset="1" stop-color="#0c6b6b"/>
+    </linearGradient>
+  </defs>
+  <!-- window frame -->
+  <rect x="1" y="1" width="778" height="458" rx="12" fill="#0b0f16" stroke="#232a3a" stroke-width="1.4"/>
+  <path d="M1 13 a12 12 0 0 1 12 -12 h754 a12 12 0 0 1 12 12 v22 h-778 z" fill="#1b2230"/>
+  <text x="16" y="22" font-family="Segoe UI,Arial,sans-serif" font-size="12.5" fill="#aeb8c8">34.61.44.7  Remote Desktop</text>
+  <g fill="#8a94a6" font-family="Segoe UI,Arial,sans-serif" font-size="14">
+    <text x="726" y="23">_</text><rect x="742" y="9" width="10" height="10" fill="none" stroke="#8a94a6"/><text x="760" y="23" fill="#ec6a5e">x</text>
+  </g>
+
+  <!-- desktop wallpaper -->
+  <rect x="6" y="35" width="768" height="384" fill="url(#wall)"/>
+
+  <!-- desktop icons -->
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#eaf2ff" text-anchor="middle">
+    <rect x="28" y="52" width="34" height="30" rx="4" fill="#f4c542"/><path d="M28 60 h34 v22 h-34 z" fill="#ffd873"/><text x="45" y="98">This PC</text>
+    <rect x="30" y="120" width="30" height="30" rx="4" fill="#2f6fed"/><text x="45" y="166">Edge</text>
+  </g>
+
+  <!-- powershell window -->
+  <g>
+    <rect x="180" y="96" width="470" height="228" rx="8" fill="#0c0c0c" stroke="#3a3a3a" stroke-width="1.2"/>
+    <rect x="180" y="96" width="470" height="26" rx="8" fill="#1e1e1e"/>
+    <text x="196" y="113" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#d7d7d7">Administrator: Windows PowerShell</text>
+    <g font-family="Consolas,Menlo,monospace" font-size="13" fill="#dfe6ee">
+      <text x="196" y="150"><tspan fill="#63b0ff">PS C:\&gt;</tspan> Get-Service sshd</text>
+      <text x="196" y="176" fill="#9aa4b2">Status    Name    DisplayName</text>
+      <text x="196" y="194" fill="#9aa4b2">------    ----    -----------</text>
+      <text x="196" y="214"><tspan fill="#61c554">Running</tspan>   sshd    OpenSSH SSH Server</text>
+      <text x="196" y="252"><tspan fill="#63b0ff">PS C:\&gt;</tspan> whoami</text>
+      <text x="196" y="272" fill="#dfe6ee">rdpbox\admin</text>
+      <text x="196" y="300"><tspan fill="#63b0ff">PS C:\&gt;</tspan> <tspan fill="#dfe6ee">_</tspan></text>
+    </g>
+  </g>
+
+  <!-- taskbar -->
+  <rect x="6" y="391" width="768" height="28" fill="#0e1b2e" opacity="0.92"/>
+  <g transform="translate(20,398)">
+    <rect x="0" y="0" width="6" height="6" fill="#00A4EF"/><rect x="7" y="0" width="6" height="6" fill="#00A4EF"/>
+    <rect x="0" y="7" width="6" height="6" fill="#00A4EF"/><rect x="7" y="7" width="6" height="6" fill="#00A4EF"/>
+  </g>
+  <rect x="48" y="397" width="150" height="16" rx="8" fill="#1c2c44"/>
+  <text x="60" y="409" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" fill="#7f8da0">Search</text>
+  <text x="740" y="409" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" fill="#c9d3e0" text-anchor="end">10:24</text>
+</svg>

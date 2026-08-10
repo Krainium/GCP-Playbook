@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="248" viewBox="0 0 780 248" role="img" aria-label="SSH session into the Windows instance">
+  <rect x="1" y="1" width="778" height="246" rx="12" fill="#0c1018" stroke="#232a3a" stroke-width="1.4"/>
+  <path d="M1 13 a12 12 0 0 1 12 -12 h754 a12 12 0 0 1 12 12 v26 h-778 z" fill="#171d29"/>
+  <circle cx="24" cy="20" r="6" fill="#ec6a5e"/>
+  <circle cx="44" cy="20" r="6" fill="#f4bf4f"/>
+  <circle cx="64" cy="20" r="6" fill="#61c554"/>
+  <text x="390" y="24.5" font-family="Segoe UI,Arial,sans-serif" font-size="12.5" fill="#8a94a6" text-anchor="middle">ssh</text>
+
+  <g font-family="Consolas,Menlo,monospace" font-size="13.5">
+    <text x="20" y="70"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> ssh root@34.61.44.7</tspan></text>
+    <text x="20" y="92" fill="#8a94a6">root@34.61.44.7's password:</text>
+    <text x="20" y="120" fill="#c9d3e0">Microsoft Windows [Version 10.0.26100.2033]</text>
+    <text x="20" y="140" fill="#8a94a6">(c) Microsoft Corporation. All rights reserved.</text>
+    <text x="20" y="176"><tspan fill="#63b0ff">rdpbox\root</tspan></text>
+    <text x="20" y="204"><tspan fill="#f4bf4f">C:\Users\root&gt;</tspan><tspan fill="#e6edf3"> whoami</tspan></text>
+    <text x="20" y="224" fill="#c9d3e0">rdpbox\root</text>
+  </g>
+</svg>

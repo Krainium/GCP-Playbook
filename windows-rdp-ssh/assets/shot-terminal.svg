@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="308" viewBox="0 0 780 308" role="img" aria-label="Terminal showing the setup commands">
+  <rect x="1" y="1" width="778" height="306" rx="12" fill="#0c1018" stroke="#232a3a" stroke-width="1.4"/>
+  <path d="M1 13 a12 12 0 0 1 12 -12 h754 a12 12 0 0 1 12 12 v26 h-778 z" fill="#171d29"/>
+  <circle cx="24" cy="20" r="6" fill="#ec6a5e"/>
+  <circle cx="44" cy="20" r="6" fill="#f4bf4f"/>
+  <circle cx="64" cy="20" r="6" fill="#61c554"/>
+  <text x="390" y="24.5" font-family="Segoe UI,Arial,sans-serif" font-size="12.5" fill="#8a94a6" text-anchor="middle">setup</text>
+
+  <g font-family="Consolas,Menlo,monospace" font-size="13.5">
+    <text x="20" y="70"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> gcloud auth activate-service-account </tspan><tspan fill="#7cc7ff">--key-file</tspan><tspan fill="#e6edf3">=service_account.json</tspan></text>
+    <text x="20" y="92" fill="#8a94a6">Activated service account credentials for builder@project.iam</text>
+
+    <text x="20" y="126"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> gcloud compute instances create rdpbox </tspan><tspan fill="#7cc7ff">--zone</tspan><tspan fill="#e6edf3"> us-central1-a \</tspan></text>
+    <text x="34" y="148"><tspan fill="#7cc7ff">--image-family</tspan><tspan fill="#e6edf3"> windows-2025 </tspan><tspan fill="#7cc7ff">--image-project</tspan><tspan fill="#e6edf3"> windows-cloud</tspan></text>
+    <text x="20" y="170" fill="#8a94a6">NAME     ZONE           STATUS    EXTERNAL_IP</text>
+    <text x="20" y="188" fill="#c9d3e0">rdpbox   us-central1-a  RUNNING   34.61.44.7</text>
+
+    <text x="20" y="222"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> gcloud compute reset-windows-password rdpbox </tspan><tspan fill="#7cc7ff">--user</tspan><tspan fill="#e6edf3"> admin</tspan></text>
+    <text x="20" y="248" fill="#c9d3e0">ip_address: <tspan fill="#f4bf4f">34.61.44.7</tspan></text>
+    <text x="20" y="268" fill="#c9d3e0">username:   <tspan fill="#f4bf4f">admin</tspan></text>
+    <text x="20" y="288" fill="#c9d3e0">password:   <tspan fill="#61c554">p8Kd2mQ!vX3zR</tspan></text>
+  </g>
+</svg>
