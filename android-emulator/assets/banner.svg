@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="180" viewBox="0 0 880 180" role="img" aria-label="Android 9 on GCP">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#101d18"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3DDC84"/>
+      <stop offset="1" stop-color="#4285F4"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="180" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="7" height="180" rx="3.5" fill="url(#bar)"/>
+
+  <g transform="translate(44,42)">
+    <g fill="#2f6fed" opacity="0.85">
+      <circle cx="20" cy="74" r="13"/><circle cx="40" cy="68" r="17"/><circle cx="60" cy="74" r="12"/>
+      <rect x="12" y="72" width="56" height="14" rx="7"/>
+    </g>
+    <g transform="translate(16,4)">
+      <path d="M0 34 a24 24 0 0 1 48 0 z" fill="#3DDC84"/>
+      <g stroke="#3DDC84" stroke-width="3" stroke-linecap="round"><path d="M9 3 l6 11 M39 3 l-6 11"/></g>
+      <circle cx="16" cy="23" r="3" fill="#0b1220"/>
+      <circle cx="32" cy="23" r="3" fill="#0b1220"/>
+    </g>
+  </g>
+
+  <text x="150" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="700" fill="#e8f7ee">Android 9 on GCP</text>
+  <text x="151" y="100" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#9ab5a6">A KVM accelerated Android 9 emulator on a Linux VM, reached over VNC or RDP.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <rect x="151" y="120" width="150" height="30" rx="15" fill="#123a26" stroke="#3DDC84" stroke-width="1.2"/>
+    <circle cx="171" cy="135" r="4" fill="#7ee2a8"/>
+    <text x="231" y="139.5" fill="#93e6b6" text-anchor="middle">KVM accelerated</text>
+    <rect x="311" y="120" width="110" height="30" rx="15" fill="#12305e" stroke="#4285F4" stroke-width="1.2"/>
+    <circle cx="331" cy="135" r="4" fill="#8ab4f8"/>
+    <text x="378" y="139.5" fill="#a9c7fb" text-anchor="middle">Android 9</text>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 780 300" role="img" aria-label="Terminal showing the KVM check, image install, and boot">
+  <rect x="1" y="1" width="778" height="298" rx="12" fill="#0c1018" stroke="#232a3a" stroke-width="1.4"/>
+  <path d="M1 13 a12 12 0 0 1 12 -12 h754 a12 12 0 0 1 12 12 v26 h-778 z" fill="#171d29"/>
+  <circle cx="24" cy="20" r="6" fill="#ec6a5e"/><circle cx="44" cy="20" r="6" fill="#f4bf4f"/><circle cx="64" cy="20" r="6" fill="#61c554"/>
+  <text x="390" y="24.5" font-family="Segoe UI,Arial,sans-serif" font-size="12.5" fill="#8a94a6" text-anchor="middle">android</text>
+
+  <g font-family="Consolas,Menlo,monospace" font-size="13.5">
+    <text x="20" y="68"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> kvm-ok</tspan></text>
+    <text x="20" y="88" fill="#8a94a6">INFO: /dev/kvm exists</text>
+    <text x="20" y="106" fill="#7ee2a8">INFO: KVM acceleration can be used</text>
+
+    <text x="20" y="138"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> sdkmanager </tspan><tspan fill="#c9d3e0">"system-images;android-28;google_apis_playstore;x86_64"</tspan></text>
+    <text x="20" y="158" fill="#8a94a6">Installing Android 9 (Pie) image ... done</text>
+
+    <text x="20" y="190"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> emulator @and9 </tspan><tspan fill="#7cc7ff">-gpu</tspan><tspan fill="#e6edf3"> swiftshader_indirect </tspan><tspan fill="#7cc7ff">-no-boot-anim</tspan><tspan fill="#e6edf3"> &amp;</tspan></text>
+
+    <text x="20" y="222"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> adb shell getprop sys.boot_completed</tspan></text>
+    <text x="20" y="242" fill="#7ee2a8">1</text>
+    <text x="20" y="270"><tspan fill="#61c554">$</tspan><tspan fill="#e6edf3"> adb shell getprop ro.build.version.release</tspan></text>
+    <text x="20" y="290" fill="#f4bf4f">9</text>
+  </g>
+</svg>
