@@ -1,0 +1,13 @@
+# Beyla generates traces from the app via eBPF and sends them to Tempo (OTLP).
+config:
+  data:
+    discovery:
+      services:
+        - k8s_namespace: demo
+    attributes:
+      kubernetes:
+        enable: true
+env:
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://tempo.lgtm.svc:4318"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+  BEYLA_OTEL_TRACES_SAMPLER: "always_on"
