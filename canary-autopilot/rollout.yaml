@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+  namespace: demo
+spec:
+  args:
+  - name: service
+  metrics:
+  - name: success-rate
+    initialDelay: 45s
+    interval: 20s
+    count: 5
+    successCondition: "result[0] >= 0.95"
+    failureLimit: 0
+    provider:
+      prometheus:
+        address: http://kube-prometheus-stack-prometheus.monitoring.svc:9090
+        query: |
+          sum(rate(http_request_duration_seconds_count{namespace="demo",path!~"healthz|readyz|livez",status=~"2.."}[40s]))
+          /
+          sum(rate(http_request_duration_seconds_count{namespace="demo",path!~"healthz|readyz|livez"}[40s]))
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  replicas: 4
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      containers:
+      - name: podinfo
+        image: ghcr.io/stefanprodan/podinfo:6.7.0
+        ports:
+        - name: http
+          containerPort: 9898
+        args:
+        - ./podinfo
+        - --port=9898
+        resources:
+          requests:
+            cpu: 50m
+            memory: 32Mi
+  strategy:
+    canary:
+      steps:
+      - setWeight: 80
+      - pause: {duration: 20s}
+      - analysis:
+          templates:
+          - templateName: success-rate
+          args:
+          - name: service
+            value: podinfo
+      - setWeight: 100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo
+  namespace: demo
+  labels:
+    app: podinfo
+spec:
+  selector:
+    app: podinfo
+  ports:
+  - name: http
+    port: 9898
+    targetPort: 9898
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: podinfo
+  namespace: demo
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: podinfo
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 10s
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+  namespace: demo
+spec:
+  replicas: 4
+  selector:
+    matchLabels: {app: loadgen}
+  template:
+    metadata:
+      labels: {app: loadgen}
+    spec:
+      containers:
+      - name: loadgen
+        image: curlimages/curl:8.10.1
+        resources:
+          requests: {cpu: 20m, memory: 16Mi}
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          while true; do
+            curl -s -o /dev/null http://podinfo.demo.svc:9898/ || true
+            curl -s -o /dev/null http://podinfo.demo.svc:9898/api/info || true
+          done

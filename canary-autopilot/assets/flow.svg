@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from a new version to a canary to SLO analysis to promote or rollback">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:14px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11.5px}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- node 1: new version -->
+  <rect x="24" y="76" width="150" height="68" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(44,100)" fill="none" stroke="#8ab4f8" stroke-width="2.2">
+    <rect x="0" y="0" width="24" height="24" rx="4"/><path d="M6 12 h12 M12 6 v12" stroke-linecap="round"/>
+  </g>
+  <text class="lbl" x="82" y="106">New</text>
+  <text class="lbl" x="82" y="123">version</text>
+
+  <!-- node 2: canary -->
+  <rect x="214" y="76" width="150" height="68" rx="12" fill="#161d2c" stroke="#5a4a12" stroke-width="1.4"/>
+  <g transform="translate(234,102)" fill="#FBBC05">
+    <circle cx="10" cy="8" r="7"/><path d="M16 6 l6 -3 -3 6 z"/><circle cx="12" cy="7" r="1.2" fill="#0b1220"/>
+  </g>
+  <text class="lbl" x="272" y="106">Canary</text>
+  <text class="lbl" x="272" y="123">slice of traffic</text>
+
+  <!-- node 3: SLO analysis -->
+  <rect x="404" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(422,100)" fill="none" stroke="#8ab4f8" stroke-width="2">
+    <path d="M0 22 V2 M0 22 H24" stroke-linecap="round"/>
+    <path d="M2 16 l6 -6 l5 4 l8 -10" stroke="#f6cf6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="lbl" x="462" y="106">SLO</text>
+  <text class="lbl" x="462" y="123">analysis</text>
+
+  <!-- output: promote -->
+  <rect x="620" y="40" width="196" height="56" rx="12" fill="#161d2c" stroke="#173f2a" stroke-width="1.4"/>
+  <g transform="translate(638,56)" fill="none" stroke="#7ee2a8" stroke-width="2.4">
+    <circle cx="11" cy="11" r="10"/><path d="M6 11 l4 4 l7 -8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="lbl" x="676" y="63">Promote</text>
+  <text class="sub" x="676" y="80">SLO holds, ship it</text>
+
+  <!-- output: rollback -->
+  <rect x="620" y="124" width="196" height="56" rx="12" fill="#161d2c" stroke="#5a1f22" stroke-width="1.4"/>
+  <g transform="translate(638,140)" fill="none" stroke="#f28b82" stroke-width="2.4">
+    <circle cx="11" cy="11" r="10"/><path d="M7 7 l8 8 M15 7 l-8 8" stroke-linecap="round"/>
+  </g>
+  <text class="lbl" x="676" y="147">Roll back</text>
+  <text class="sub" x="676" y="164">SLO breached, undo</text>
+
+  <!-- arrows -->
+  <line x1="174" y1="110" x2="208" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="364" y1="110" x2="398" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M560 110 H592 V68 H614" fill="none" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M560 110 H592 V152 H614" fill="none" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="99" y="164" text-anchor="middle">deploy</text>
+  <text class="sub" x="289" y="164" text-anchor="middle">weight steps</text>
+  <text class="sub" x="482" y="164" text-anchor="middle">query Prometheus</text>
+</svg>

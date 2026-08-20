@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="180" viewBox="0 0 880 180" role="img" aria-label="Canary Autopilot on GKE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#141c2e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4285F4"/>
+      <stop offset="0.5" stop-color="#34A853"/>
+      <stop offset="1" stop-color="#FBBC05"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="180" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="7" height="180" rx="3.5" fill="url(#bar)"/>
+
+  <!-- emblem: a canary gauge + rising/failing traffic split -->
+  <g transform="translate(44,44)">
+    <!-- dial arc -->
+    <path d="M6 74 A44 44 0 0 1 94 74" fill="none" stroke="#22304a" stroke-width="9"/>
+    <path d="M6 74 A44 44 0 0 1 62 33" fill="none" stroke="#34A853" stroke-width="9" stroke-linecap="round"/>
+    <!-- needle -->
+    <line x1="50" y1="74" x2="74" y2="46" stroke="#FBBC05" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="50" cy="74" r="6" fill="#FBBC05"/>
+    <!-- little canary bird -->
+    <g transform="translate(30,4)" fill="#FBBC05">
+      <circle cx="10" cy="10" r="8"/>
+      <path d="M17 8 l7 -3 -3 6 z"/>
+      <circle cx="12" cy="8" r="1.4" fill="#0b1220"/>
+    </g>
+  </g>
+
+  <text x="150" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="700" fill="#e8eef7">Canary Autopilot</text>
+  <text x="151" y="100" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#9aa7ba">Deploys that promote or roll back on their own, gated by your live SLOs.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <rect x="151" y="120" width="118" height="30" rx="15" fill="#123a26" stroke="#34A853" stroke-width="1.2"/>
+    <circle cx="171" cy="135" r="4" fill="#7ee2a8"/>
+    <text x="215" y="139.5" fill="#93e6b6" text-anchor="middle">Argo Rollouts</text>
+    <rect x="279" y="120" width="116" height="30" rx="15" fill="#12305e" stroke="#4285F4" stroke-width="1.2"/>
+    <circle cx="299" cy="135" r="4" fill="#8ab4f8"/>
+    <text x="341" y="139.5" fill="#a9c7fb" text-anchor="middle">Prometheus</text>
+    <rect x="405" y="120" width="96" height="30" rx="15" fill="#3a2a12" stroke="#FBBC05" stroke-width="1.2"/>
+    <circle cx="425" cy="135" r="4" fill="#f6cf6a"/>
+    <text x="461" y="139.5" fill="#f2d488" text-anchor="middle">Grafana</text>
+  </g>
+</svg>
