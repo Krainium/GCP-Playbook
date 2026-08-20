@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="180" viewBox="0 0 880 180" role="img" aria-label="Fleet Command on GKE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#141c2e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4285F4"/>
+      <stop offset="0.5" stop-color="#34A853"/>
+      <stop offset="1" stop-color="#FBBC05"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="180" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="7" height="180" rx="3.5" fill="url(#bar)"/>
+
+  <!-- emblem: a globe with cluster markers in different regions -->
+  <g transform="translate(90,90)">
+    <circle r="46" fill="#101827" stroke="#22304a" stroke-width="2.5"/>
+    <ellipse rx="46" ry="18" fill="none" stroke="#22304a" stroke-width="1.6"/>
+    <ellipse rx="26" ry="46" fill="none" stroke="#22304a" stroke-width="1.6"/>
+    <path d="M-46 -8 Q0 -20 46 -8 M-46 12 Q0 24 46 12" fill="none" stroke="#22304a" stroke-width="1.4"/>
+    <circle cx="-16" cy="-14" r="5" fill="#34A853"/>
+    <circle cx="18" cy="6" r="5" fill="#FBBC05"/>
+    <circle cx="-6" cy="22" r="5" fill="#4285F4"/>
+  </g>
+
+  <text x="170" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="700" fill="#e8eef7">Fleet Command</text>
+  <text x="171" y="100" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#9aa7ba">One screen for every cluster in every region.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <rect x="171" y="120" width="94" height="30" rx="15" fill="#12305e" stroke="#4285F4" stroke-width="1.2"/>
+    <circle cx="189" cy="135" r="4" fill="#8ab4f8"/>
+    <text x="223" y="139.5" fill="#a9c7fb" text-anchor="middle">GKE Fleet</text>
+    <rect x="275" y="120" width="70" height="30" rx="15" fill="#3a2a12" stroke="#FBBC05" stroke-width="1.2"/>
+    <circle cx="293" cy="135" r="4" fill="#f6cf6a"/>
+    <text x="319" y="139.5" fill="#f2d488" text-anchor="middle">Mimir</text>
+    <rect x="355" y="120" width="96" height="30" rx="15" fill="#123a26" stroke="#34A853" stroke-width="1.2"/>
+    <circle cx="373" cy="135" r="4" fill="#7ee2a8"/>
+    <text x="411" y="139.5" fill="#93e6b6" text-anchor="middle">Grafana</text>
+  </g>
+</svg>

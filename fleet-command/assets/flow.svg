@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from clusters in many regions through a central store to one Grafana control room">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:13.5px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11px}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- region clusters -->
+  <rect x="24" y="40" width="150" height="52" rx="12" fill="#161d2c" stroke="#173f2a" stroke-width="1.4"/>
+  <circle cx="46" cy="66" r="6" fill="#34A853"/>
+  <text class="lbl" x="64" y="63">cluster</text><text class="sub" x="64" y="79">us-central1</text>
+
+  <rect x="24" y="128" width="150" height="52" rx="12" fill="#161d2c" stroke="#5a4a12" stroke-width="1.4"/>
+  <circle cx="46" cy="154" r="6" fill="#FBBC05"/>
+  <text class="lbl" x="64" y="151">cluster</text><text class="sub" x="64" y="167">us-east1</text>
+
+  <!-- central store -->
+  <rect x="330" y="82" width="160" height="66" rx="12" fill="#161d2c" stroke="#3a2a12" stroke-width="1.4"/>
+  <g transform="translate(348,100)" fill="#f6cf6a"><ellipse cx="12" cy="4" rx="12" ry="4"/><path d="M0 4 v20 a12 4 0 0 0 24 0 v-20" fill="none" stroke="#f6cf6a" stroke-width="2"/></g>
+  <text class="lbl" x="388" y="108">Central store</text>
+  <text class="sub" x="388" y="126">Mimir, all regions</text>
+
+  <!-- control room -->
+  <rect x="620" y="72" width="196" height="86" rx="12" fill="#161d2c" stroke="#4285F4" stroke-width="1.4"/>
+  <g transform="translate(638,92)"><circle cx="12" cy="12" r="11" fill="none" stroke="#8ab4f8" stroke-width="2"/><circle cx="6" cy="8" r="2" fill="#34A853"/><circle cx="17" cy="14" r="2" fill="#FBBC05"/></g>
+  <text class="lbl" x="676" y="100">One control room</text>
+  <text class="sub" x="676" y="118">geomap, fleet SLOs,</text>
+  <text class="sub" x="676" y="134">drill into any node</text>
+
+  <!-- arrows -->
+  <path d="M174 66 H250 V108 H324" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M174 154 H250 V122 H324" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="490" y1="115" x2="614" y2="115" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="252" y="100" text-anchor="middle">remote write</text>
+  <text class="sub" x="552" y="108" text-anchor="middle">one query surface</text>
+</svg>

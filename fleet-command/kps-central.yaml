@@ -1,0 +1,22 @@
+grafana:
+  adminPassword: "fleet"
+  service: {type: ClusterIP}
+prometheus:
+  service:
+    type: LoadBalancer          # expose so the edge cluster can remote-write in
+  prometheusSpec:
+    retention: 3h
+    enableRemoteWriteReceiver: true
+    serviceMonitorSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: us-central1
+      region: us-central1
+      geo_lat: "41.26"
+      geo_lon: "-95.86"
+    resources:
+      requests: {cpu: 200m, memory: 512Mi}
+      limits: {memory: 1Gi}
+alertmanager: {enabled: false}
+prometheus-node-exporter:
+  resources:
+    requests: {cpu: 20m, memory: 24Mi}

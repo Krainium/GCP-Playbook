@@ -1,0 +1,23 @@
+grafana: {enabled: false}
+alertmanager: {enabled: false}
+prometheus:
+  prometheusSpec:
+    retention: 1h
+    serviceMonitorSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: us-east1
+      region: us-east1
+      geo_lat: "33.20"
+      geo_lon: "-80.01"
+    remoteWrite:
+      - url: http://34.29.193.113:9090/api/v1/write
+        writeRelabelConfigs:
+          - sourceLabels: [__name__]
+            regex: "up|node_load1|kube_pod_info|node_cpu_seconds_total|kube_node_info"
+            action: keep
+    resources:
+      requests: {cpu: 150m, memory: 400Mi}
+      limits: {memory: 768Mi}
+prometheus-node-exporter:
+  resources:
+    requests: {cpu: 20m, memory: 24Mi}
