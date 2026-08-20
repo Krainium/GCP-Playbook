@@ -1,0 +1,10 @@
+tetragon:
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      labelsOverride:
+        release: kube-prometheus-stack
+tetragonOperator:
+  prometheus:
+    enabled: false

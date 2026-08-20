@@ -1,0 +1,50 @@
+# Flag reads of sensitive files anywhere in the cluster.
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: sensitive-files
+spec:
+  kprobes:
+  - call: "security_file_permission"
+    syscall: false
+    return: true
+    args:
+    - index: 0
+      type: "file"
+    - index: 1
+      type: "int"
+    returnArg:
+      index: 0
+      type: "int"
+    returnArgAction: "Post"
+    selectors:
+    - matchArgs:
+      - index: 0
+        operator: "Prefix"
+        values:
+        - "/etc/shadow"
+        - "/etc/sudoers"
+        - "/etc/ssh/sshd_config"
+        - "/root/.ssh"
+---
+# Flag new outbound TCP connections (egress to unexpected IPs).
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: egress-connect
+spec:
+  kprobes:
+  - call: "tcp_connect"
+    syscall: false
+    args:
+    - index: 0
+      type: "sock"
+    selectors:
+    - matchArgs:
+      - index: 0
+        operator: "NotDAddr"
+        values:
+        - "127.0.0.1"
+        - "10.0.0.0/8"
+        - "172.16.0.0/12"
+        - "192.168.0.0/16"

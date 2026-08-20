@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attacker
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: attacker}
+  template:
+    metadata:
+      labels: {app: attacker}
+    spec:
+      containers:
+      - name: attacker
+        image: ubuntu:24.04
+        resources: {requests: {cpu: 50m, memory: 32Mi}}
+        command: ["/bin/bash","-c"]
+        args:
+        - |
+          apt-get update -qq >/dev/null 2>&1; apt-get install -y -qq curl >/dev/null 2>&1
+          while true; do
+            cat /etc/shadow >/dev/null 2>&1
+            head /etc/sudoers >/dev/null 2>&1
+            cat /etc/ssh/sshd_config >/dev/null 2>&1
+            ls -la /root/.ssh >/dev/null 2>&1
+            curl -s -m 2 -o /dev/null https://1.1.1.1 2>&1
+            curl -s -m 2 -o /dev/null https://8.8.8.8 2>&1
+            id >/dev/null; whoami >/dev/null; uname -a >/dev/null
+            sleep 1
+          done

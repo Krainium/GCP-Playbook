@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="180" viewBox="0 0 880 180" role="img" aria-label="Runtime Threat Map on GKE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#141c2e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4285F4"/>
+      <stop offset="0.5" stop-color="#34A853"/>
+      <stop offset="1" stop-color="#FBBC05"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="180" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="7" height="180" rx="3.5" fill="url(#bar)"/>
+
+  <!-- emblem: a radar shield with a sweep and threat blips -->
+  <g transform="translate(90,90)">
+    <circle r="46" fill="none" stroke="#22304a" stroke-width="2.5"/>
+    <circle r="30" fill="none" stroke="#22304a" stroke-width="2"/>
+    <circle r="14" fill="none" stroke="#22304a" stroke-width="2"/>
+    <!-- sweep -->
+    <path d="M0 0 L40 -22 A46 46 0 0 0 46 0 Z" fill="#34A853" fill-opacity="0.25"/>
+    <line x1="0" y1="0" x2="44" y2="-14" stroke="#7ee2a8" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- threat blips -->
+    <circle cx="22" cy="-18" r="4" fill="#ea4335"/>
+    <circle cx="-26" cy="10" r="3.5" fill="#FBBC05"/>
+    <circle cx="8" cy="30" r="3" fill="#ea4335"/>
+  </g>
+
+  <text x="170" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#e8eef7">Runtime Threat Map</text>
+  <text x="171" y="100" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#9aa7ba">Watch syscalls, process launches, and policy violations live.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <rect x="171" y="120" width="88" height="30" rx="15" fill="#3a1414" stroke="#ea4335" stroke-width="1.2"/>
+    <circle cx="189" cy="135" r="4" fill="#f0857c"/>
+    <text x="221" y="139.5" fill="#f4a49d" text-anchor="middle">Tetragon</text>
+    <rect x="269" y="120" width="70" height="30" rx="15" fill="#123a26" stroke="#34A853" stroke-width="1.2"/>
+    <circle cx="287" cy="135" r="4" fill="#7ee2a8"/>
+    <text x="313" y="139.5" fill="#93e6b6" text-anchor="middle">eBPF</text>
+    <rect x="349" y="120" width="96" height="30" rx="15" fill="#3a2a12" stroke="#FBBC05" stroke-width="1.2"/>
+    <circle cx="367" cy="135" r="4" fill="#f6cf6a"/>
+    <text x="405" y="139.5" fill="#f2d488" text-anchor="middle">Grafana</text>
+  </g>
+</svg>
