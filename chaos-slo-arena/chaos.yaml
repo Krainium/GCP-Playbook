@@ -1,0 +1,35 @@
+# Fail half the podinfo fleet for 3 minutes. Unlike pod-kill (which restarts in
+# a second and barely dents the metrics), pod-failure holds the pods dead for the
+# whole duration, so availability genuinely drops and the error budget burns.
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-failure
+  namespace: demo
+spec:
+  action: pod-failure
+  mode: fixed-percent
+  value: "50"
+  duration: "3m"
+  selector:
+    namespaces: [demo]
+    labelSelectors:
+      app: podinfo
+---
+# A network delay on the survivors, for latency flavor on the same timeline.
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: net-delay
+  namespace: demo
+spec:
+  action: delay
+  mode: all
+  duration: "3m"
+  selector:
+    namespaces: [demo]
+    labelSelectors:
+      app: podinfo
+  delay:
+    latency: "150ms"
+    jitter: "40ms"

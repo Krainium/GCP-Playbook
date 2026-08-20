@@ -1,0 +1,14 @@
+grafana:
+  adminPassword: "chaos"
+  service: {type: ClusterIP}
+prometheus:
+  prometheusSpec:
+    retention: 2h
+    serviceMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests: {cpu: 200m, memory: 512Mi}
+      limits: {memory: 1Gi}
+alertmanager: {enabled: false}
+prometheus-node-exporter:
+  resources:
+    requests: {cpu: 20m, memory: 24Mi}

@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: demo}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  replicas: 4
+  selector:
+    matchLabels: {app: podinfo}
+  template:
+    metadata:
+      labels: {app: podinfo}
+    spec:
+      containers:
+      - name: podinfo
+        image: ghcr.io/stefanprodan/podinfo:6.7.1
+        ports: [{name: http, containerPort: 9898}]
+        readinessProbe:
+          httpGet: {path: /readyz, port: 9898}
+          periodSeconds: 3
+        resources:
+          requests: {cpu: 50m, memory: 32Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {app: podinfo}
+spec:
+  selector: {app: podinfo}
+  ports: [{name: http, port: 9898, targetPort: 9898}]
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {release: kube-prometheus-stack}
+spec:
+  selector:
+    matchLabels: {app: podinfo}
+  endpoints: [{port: http, path: /metrics, interval: 10s}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: loadgen}
+  template:
+    metadata:
+      labels: {app: loadgen}
+    spec:
+      containers:
+      - name: loadgen
+        image: curlimages/curl:8.10.1
+        resources:
+          requests: {cpu: 20m, memory: 16Mi}
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          while true; do curl -s -m 2 -o /dev/null http://podinfo.demo.svc:9898/ || true; done
