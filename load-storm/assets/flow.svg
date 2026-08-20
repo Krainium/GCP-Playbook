@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from k6 load through the target to Prometheus and one Grafana board">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:14px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11.5px}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- node 1: k6 load -->
+  <rect x="24" y="76" width="150" height="68" rx="12" fill="#161d2c" stroke="#5a4a12" stroke-width="1.4"/>
+  <path d="M44 118 l10 -6 l9 2 l10 -12 l13 -6" transform="translate(0,-2)" fill="none" stroke="#FBBC05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="lbl" x="82" y="106">k6 storm</text>
+  <text class="lbl" x="82" y="123">ramping VUs</text>
+
+  <!-- node 2: target -->
+  <rect x="214" y="76" width="150" height="68" rx="12" fill="#161d2c" stroke="#0e4d6b" stroke-width="1.4"/>
+  <g transform="translate(234,100)" fill="none" stroke="#8ab4f8" stroke-width="2">
+    <rect x="0" y="4" width="26" height="18" rx="3"/><path d="M6 4 v-3 M20 4 v-3 M6 26 v3 M20 26 v3"/>
+  </g>
+  <text class="lbl" x="272" y="106">Target</text>
+  <text class="lbl" x="272" y="123">with HPA</text>
+
+  <!-- node 3: prometheus -->
+  <rect x="404" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(422,100)" fill="#e8703a">
+    <circle cx="12" cy="12" r="11"/><rect x="9" y="1" width="6" height="10" rx="3" fill="#161d2c"/>
+  </g>
+  <text class="lbl" x="462" y="106">Prometheus</text>
+  <text class="lbl" x="462" y="123">one store</text>
+
+  <!-- output: grafana board -->
+  <rect x="620" y="62" width="196" height="96" rx="12" fill="#161d2c" stroke="#123a26" stroke-width="1.4"/>
+  <g transform="translate(638,84)" fill="none" stroke="#7ee2a8" stroke-width="2">
+    <path d="M0 26 V0 M0 26 H26" stroke-linecap="round"/>
+    <path d="M2 20 l6 -6 l5 4 l9 -12" stroke="#f6cf6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="lbl" x="676" y="92">One Grafana board</text>
+  <text class="sub" x="676" y="110">VUs, p99, replicas,</text>
+  <text class="sub" x="676" y="126">node CPU together</text>
+
+  <!-- arrows -->
+  <line x1="174" y1="110" x2="208" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="364" y1="110" x2="398" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="560" y1="110" x2="614" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- target also reports to prometheus (curved feedback) -->
+  <path d="M289 144 V172 H462 V148" fill="none" stroke="#3b4761" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="99" y="164" text-anchor="middle">hammer it</text>
+  <text class="sub" x="289" y="192" text-anchor="middle">app + cluster metrics</text>
+  <text class="sub" x="482" y="164" text-anchor="middle">remote write</text>
+</svg>

@@ -1,0 +1,19 @@
+# kube-prometheus-stack for load-storm: Grafana + Prometheus with a remote-write
+# receiver so k6 can push its own metrics into the same Prometheus.
+grafana:
+  adminPassword: "loadstorm"
+  service:
+    type: ClusterIP
+prometheus:
+  prometheusSpec:
+    retention: 2h
+    enableRemoteWriteReceiver: true
+    serviceMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests: {cpu: 200m, memory: 512Mi}
+      limits: {memory: 1Gi}
+alertmanager:
+  enabled: false
+prometheus-node-exporter:
+  resources:
+    requests: {cpu: 20m, memory: 24Mi}

@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: podinfo}
+  template:
+    metadata:
+      labels: {app: podinfo}
+    spec:
+      containers:
+      - name: podinfo
+        image: ghcr.io/stefanprodan/podinfo:6.7.1
+        ports:
+        - {name: http, containerPort: 9898}
+        resources:
+          requests: {cpu: 100m, memory: 32Mi}
+          limits:   {cpu: 250m, memory: 64Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {app: podinfo}
+spec:
+  selector: {app: podinfo}
+  ports:
+  - {name: http, port: 9898, targetPort: 9898}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {release: kube-prometheus-stack}
+spec:
+  selector:
+    matchLabels: {app: podinfo}
+  endpoints:
+  - {port: http, path: /metrics, interval: 10s}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: podinfo
+  minReplicas: 1
+  maxReplicas: 8
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target: {type: Utilization, averageUtilization: 50}
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - {type: Pods, value: 4, periodSeconds: 15}
