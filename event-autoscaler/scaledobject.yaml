@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: demo}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: podinfo}
+  template:
+    metadata:
+      labels: {app: podinfo}
+    spec:
+      containers:
+      - name: podinfo
+        image: ghcr.io/stefanprodan/podinfo:6.7.1
+        ports: [{name: http, containerPort: 9898}]
+        resources:
+          requests: {cpu: 50m, memory: 32Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {app: podinfo}
+spec:
+  selector: {app: podinfo}
+  ports: [{name: http, port: 9898, targetPort: 9898}]
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: podinfo
+  namespace: demo
+  labels: {release: kube-prometheus-stack}
+spec:
+  selector:
+    matchLabels: {app: podinfo}
+  endpoints: [{port: http, path: /metrics, interval: 10s}]
+---
+# KEDA scales podinfo on request rate from Prometheus, not CPU.
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: podinfo
+  namespace: demo
+spec:
+  scaleTargetRef:
+    name: podinfo
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  pollingInterval: 15
+  cooldownPeriod: 30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          policies: [{type: Pods, value: 4, periodSeconds: 15}]
+        scaleDown:
+          stabilizationWindowSeconds: 30
+  triggers:
+  - type: prometheus
+    metadata:
+      serverAddress: http://kube-prometheus-stack-prometheus.monitoring.svc:9090
+      metricName: podinfo_reqs_per_sec
+      query: |
+        sum(rate(http_request_duration_seconds_count{namespace="demo",path!~"healthz|readyz|livez"}[1m]))
+      threshold: "40"
+---
+# load generator, starts at 0 replicas; scale it to create demand waves.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+  namespace: demo
+spec:
+  replicas: 0
+  selector:
+    matchLabels: {app: loadgen}
+  template:
+    metadata:
+      labels: {app: loadgen}
+    spec:
+      containers:
+      - name: loadgen
+        image: curlimages/curl:8.10.1
+        resources:
+          requests: {cpu: 30m, memory: 16Mi}
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          while true; do
+            for i in $(seq 1 20); do curl -s -o /dev/null http://podinfo.demo.svc:9898/ & done
+            wait
+          done
