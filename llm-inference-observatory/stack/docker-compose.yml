@@ -1,0 +1,49 @@
+# LLM inference observatory on a single GPU box.
+# vLLM serves an OpenAI compatible endpoint on the GPU and exports Prometheus
+# metrics; dcgm-exporter exports GPU metrics; Prometheus scrapes both; Grafana
+# shows the observatory; loadgen drives traffic.
+services:
+  vllm:
+    image: vllm/vllm-openai:v0.6.3.post1
+    runtime: nvidia
+    command: >
+      --model Qwen/Qwen2.5-1.5B-Instruct
+      --max-model-len 4096 --gpu-memory-utilization 0.85
+      --disable-log-requests
+    ports: ["8000:8000"]
+    environment: [NVIDIA_VISIBLE_DEVICES=all]
+    ipc: host
+    restart: unless-stopped
+
+  gpu-exporter:
+    image: utkuozdemir/nvidia_gpu_exporter:1.2.1
+    runtime: nvidia
+    volumes:
+      - /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:ro
+    ports: ["9835:9835"]
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    volumes: ["./prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+    ports: ["9090:9090"]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=llmobs
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3000:3000"]
+    restart: unless-stopped
+
+  loadgen:
+    image: python:3.12-slim
+    depends_on: [vllm]
+    volumes: ["./loadgen.py:/loadgen.py:ro"]
+    command: ["sh","-c","pip -q install openai >/dev/null 2>&1 && python /loadgen.py"]
+    restart: unless-stopped

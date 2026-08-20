@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from a GPU serving vLLM through Prometheus to a Grafana observatory">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:13.5px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11px}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- node 1: GPU + vLLM -->
+  <rect x="24" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#1e3a12" stroke-width="1.4"/>
+  <g transform="translate(44,100)"><rect x="0" y="2" width="24" height="20" rx="3" fill="none" stroke="#a6e05a" stroke-width="2"/><rect x="7" y="9" width="10" height="6" rx="1" fill="#a6e05a"/></g>
+  <text class="lbl" x="82" y="104">GPU + vLLM</text>
+  <text class="lbl" x="82" y="121">serves tokens</text>
+
+  <!-- node 2: two metric sources -->
+  <rect x="220" y="52" width="150" height="44" rx="10" fill="#161d2c" stroke="#5a4a12" stroke-width="1.4"/>
+  <text class="lbl" x="295" y="79" text-anchor="middle">vLLM /metrics</text>
+  <rect x="220" y="124" width="150" height="44" rx="10" fill="#161d2c" stroke="#1e3a12" stroke-width="1.4"/>
+  <text class="lbl" x="295" y="151" text-anchor="middle">nvidia-smi export</text>
+
+  <!-- node 3: prometheus -->
+  <rect x="416" y="82" width="150" height="66" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(434,100)" fill="#e8703a"><circle cx="12" cy="12" r="11"/><rect x="9" y="1" width="6" height="10" rx="3" fill="#161d2c"/></g>
+  <text class="lbl" x="474" y="108">Prometheus</text>
+  <text class="lbl" x="474" y="126">scrapes both</text>
+
+  <!-- output: observatory -->
+  <rect x="620" y="72" width="196" height="86" rx="12" fill="#161d2c" stroke="#FBBC05" stroke-width="1.4"/>
+  <g transform="translate(638,92)" fill="none" stroke="#f6cf6a" stroke-width="2"><path d="M0 26 V0 M0 26 H26" stroke-linecap="round"/><path d="M2 20 l6 -6 l5 4 l9 -12" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text class="lbl" x="676" y="98">Observatory</text>
+  <text class="sub" x="676" y="116">tokens/s, TTFT, GPU,</text>
+  <text class="sub" x="676" y="132">cost per token</text>
+
+  <!-- arrows -->
+  <path d="M180 100 H196 V74 H214" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M180 120 H196 V146 H214" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M370 74 H392 V112 H410" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M370 146 H392 V116 H410" fill="none" stroke="#5b6b86" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="566" y1="115" x2="614" y2="115" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="99" y="164" text-anchor="middle">any GPU host</text>
+  <text class="sub" x="483" y="164" text-anchor="middle">one query surface</text>
+</svg>
