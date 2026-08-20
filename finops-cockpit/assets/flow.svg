@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="220" viewBox="0 0 840 220" role="img" aria-label="Flow from cluster usage through OpenCost to a cost cockpit">
+  <defs>
+    <style>
+      .lbl{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#e8eef7;font-weight:600;font-size:14px}
+      .sub{font-family:Segoe UI,Helvetica,Arial,sans-serif;fill:#93a1b5;font-size:11.5px}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#5b6b86"/>
+    </marker>
+  </defs>
+  <rect width="840" height="220" rx="16" fill="#0d1420"/>
+
+  <!-- node 1: usage -->
+  <rect x="24" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#0e4d6b" stroke-width="1.4"/>
+  <g transform="translate(44,100)" fill="#8ab4f8"><rect x="0" y="14" width="8" height="10" rx="2"/><rect x="11" y="6" width="8" height="18" rx="2"/><rect x="22" y="0" width="8" height="24" rx="2"/></g>
+  <text class="lbl" x="82" y="104">Usage</text>
+  <text class="lbl" x="82" y="121">cpu, ram, pods</text>
+
+  <!-- node 2: opencost -->
+  <rect x="220" y="76" width="156" height="68" rx="12" fill="#161d2c" stroke="#173f2a" stroke-width="1.4"/>
+  <g transform="translate(238,98)"><circle cx="13" cy="13" r="12" fill="none" stroke="#7ee2a8" stroke-width="2.4"/><text x="13" y="18" font-family="Segoe UI,Arial" font-size="15" font-weight="700" fill="#7ee2a8" text-anchor="middle">$</text></g>
+  <text class="lbl" x="278" y="104">OpenCost</text>
+  <text class="lbl" x="278" y="121">price x usage</text>
+
+  <!-- node 3: prometheus -->
+  <rect x="416" y="76" width="150" height="68" rx="12" fill="#161d2c" stroke="#1c3a63" stroke-width="1.4"/>
+  <g transform="translate(434,100)" fill="#e8703a"><circle cx="12" cy="12" r="11"/><rect x="9" y="1" width="6" height="10" rx="3" fill="#161d2c"/></g>
+  <text class="lbl" x="474" y="104">Prometheus</text>
+  <text class="lbl" x="474" y="121">cost metrics</text>
+
+  <!-- output: cockpit -->
+  <rect x="620" y="62" width="196" height="96" rx="12" fill="#161d2c" stroke="#3a2a12" stroke-width="1.4"/>
+  <g transform="translate(640,86)">
+    <rect x="0" y="18" width="10" height="16" rx="2" fill="#34A853"/>
+    <rect x="14" y="10" width="10" height="24" rx="2" fill="#FBBC05"/>
+    <rect x="28" y="2" width="10" height="32" rx="2" fill="#ea4335"/>
+  </g>
+  <text class="lbl" x="712" y="92">Cost cockpit</text>
+  <text class="sub" x="712" y="110">spend by team,</text>
+  <text class="sub" x="712" y="126">idle waste, alerts</text>
+
+  <!-- arrows -->
+  <line x1="180" y1="110" x2="214" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="376" y1="110" x2="410" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="566" y1="110" x2="614" y2="110" stroke="#5b6b86" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text class="sub" x="102" y="164" text-anchor="middle">every workload</text>
+  <text class="sub" x="298" y="164" text-anchor="middle">list prices</text>
+  <text class="sub" x="491" y="164" text-anchor="middle">next to latency</text>
+</svg>

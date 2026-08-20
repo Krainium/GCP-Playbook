@@ -1,0 +1,62 @@
+# Three team namespaces with different footprints so cost splits per team.
+# team-gamma is deliberately over-provisioned and idle, to show wasted spend.
+apiVersion: v1
+kind: Namespace
+metadata: {name: team-alpha, labels: {team: alpha}}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: team-beta, labels: {team: beta}}
+---
+apiVersion: v1
+kind: Namespace
+metadata: {name: team-gamma, labels: {team: gamma}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: web, namespace: team-alpha}
+spec:
+  replicas: 3
+  selector: {matchLabels: {app: web}}
+  template:
+    metadata: {labels: {app: web}}
+    spec:
+      containers:
+      - name: web
+        image: ghcr.io/stefanprodan/podinfo:6.7.1
+        resources:
+          requests: {cpu: 200m, memory: 256Mi}
+          limits:   {cpu: 400m, memory: 512Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: api, namespace: team-beta}
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: api}}
+  template:
+    metadata: {labels: {app: api}}
+    spec:
+      containers:
+      - name: api
+        image: ghcr.io/stefanprodan/podinfo:6.7.1
+        resources:
+          requests: {cpu: 500m, memory: 512Mi}
+          limits:   {cpu: 800m, memory: 768Mi}
+---
+# over-provisioned + idle: requests a lot, does nothing. This is the waste.
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: batch, namespace: team-gamma}
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: batch}}
+  template:
+    metadata: {labels: {app: batch}}
+    spec:
+      containers:
+      - name: batch
+        image: registry.k8s.io/pause:3.10
+        resources:
+          requests: {cpu: 900m, memory: 1Gi}
+          limits:   {cpu: 1000m, memory: 1Gi}
