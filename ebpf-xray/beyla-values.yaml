@@ -1,0 +1,17 @@
+# Beyla as a DaemonSet: eBPF auto-instrumentation for every service in demo.
+config:
+  data:
+    discovery:
+      services:
+        - k8s_namespace: demo
+    prometheus_export:
+      port: 9400
+      path: /metrics
+      features: [application, application_service_graph]
+    attributes:
+      kubernetes:
+        enable: true
+serviceMonitor:
+  enabled: true
+  labels:
+    release: kube-prometheus-stack

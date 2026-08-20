@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: demo}
+---
+# go-httpbin: a plain HTTP service with NO Prometheus metrics of its own.
+# Every RED metric you see for it will have come purely from eBPF.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: httpbin}
+  template:
+    metadata:
+      labels: {app: httpbin}
+    spec:
+      containers:
+      - name: httpbin
+        image: mccutchen/go-httpbin:v2.15.0
+        ports: [{name: http, containerPort: 8080}]
+        resources:
+          requests: {cpu: 50m, memory: 32Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin
+  namespace: demo
+  labels: {app: httpbin}
+spec:
+  selector: {app: httpbin}
+  ports: [{name: http, port: 8080, targetPort: 8080}]
+---
+# load generator hitting a mix of status codes and delays, so the RED metrics
+# show real rate, errors, and duration.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: loadgen}
+  template:
+    metadata:
+      labels: {app: loadgen}
+    spec:
+      containers:
+      - name: loadgen
+        image: curlimages/curl:8.10.1
+        resources:
+          requests: {cpu: 20m, memory: 16Mi}
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          B=http://httpbin.demo.svc:8080
+          while true; do
+            curl -s -o /dev/null $B/status/200
+            curl -s -o /dev/null $B/status/200
+            curl -s -o /dev/null $B/status/200
+            curl -s -o /dev/null $B/status/404
+            curl -s -o /dev/null $B/status/500
+            curl -s -o /dev/null $B/delay/0.2
+            sleep 0.05
+          done

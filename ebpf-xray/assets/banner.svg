@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="180" viewBox="0 0 880 180" role="img" aria-label="eBPF X Ray for GKE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#141c2e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4285F4"/>
+      <stop offset="0.5" stop-color="#34A853"/>
+      <stop offset="1" stop-color="#FBBC05"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="180" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="7" height="180" rx="3.5" fill="url(#bar)"/>
+
+  <!-- emblem: an eye / x-ray revealing request signals inside a container -->
+  <g transform="translate(44,52)">
+    <!-- container outline -->
+    <rect x="2" y="10" width="92" height="60" rx="8" fill="none" stroke="#22304a" stroke-width="3"/>
+    <!-- x-ray eye -->
+    <path d="M14 40 C 30 22, 66 22, 82 40 C 66 58, 30 58, 14 40 Z" fill="none" stroke="#4285F4" stroke-width="3"/>
+    <circle cx="48" cy="40" r="10" fill="#4285F4" fill-opacity="0.25" stroke="#8ab4f8" stroke-width="2.5"/>
+    <circle cx="48" cy="40" r="3.5" fill="#7ee2a8"/>
+    <!-- request beams -->
+    <path d="M100 22 h14 M100 40 h20 M100 58 h14" stroke="#FBBC05" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <text x="150" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="700" fill="#e8eef7">eBPF X Ray</text>
+  <text x="151" y="100" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#9aa7ba">See every request in your cluster with zero code changes.</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600">
+    <rect x="151" y="120" width="72" height="30" rx="15" fill="#3a2a12" stroke="#FBBC05" stroke-width="1.2"/>
+    <circle cx="169" cy="135" r="4" fill="#f6cf6a"/>
+    <text x="195" y="139.5" fill="#f2d488" text-anchor="middle">Beyla</text>
+    <rect x="233" y="120" width="70" height="30" rx="15" fill="#123a26" stroke="#34A853" stroke-width="1.2"/>
+    <circle cx="251" cy="135" r="4" fill="#7ee2a8"/>
+    <text x="277" y="139.5" fill="#93e6b6" text-anchor="middle">eBPF</text>
+    <rect x="313" y="120" width="96" height="30" rx="15" fill="#3a2a12" stroke="#FBBC05" stroke-width="1.2"/>
+    <circle cx="331" cy="135" r="4" fill="#f6cf6a"/>
+    <text x="369" y="139.5" fill="#f2d488" text-anchor="middle">Grafana</text>
+  </g>
+</svg>

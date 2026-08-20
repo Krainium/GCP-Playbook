@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: beyla
+  namespace: beyla
+  labels: {app.kubernetes.io/name: beyla}
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: beyla
+  ports:
+  - {name: metrics, port: 9400, targetPort: 9400}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: beyla
+  namespace: beyla
+  labels: {release: kube-prometheus-stack}
+spec:
+  selector:
+    matchLabels: {app.kubernetes.io/name: beyla}
+  endpoints:
+  - {port: metrics, path: /metrics, interval: 15s}
